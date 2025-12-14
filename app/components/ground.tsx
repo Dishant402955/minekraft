@@ -16,11 +16,11 @@ export const Ground = () => {
 	grassTexture.magFilter = NearestFilter;
 	grassTexture.wrapS = RepeatWrapping;
 	grassTexture.wrapT = RepeatWrapping;
-	grassTexture.repeat.set(100, 100);
+	grassTexture.repeat.set(300, 300);
 
 	return (
 		<mesh ref={ref} receiveShadow>
-			<planeGeometry args={[100, 100]} />
+			<planeGeometry args={[300, 300]} />
 			<meshStandardMaterial map={grassTexture} />
 		</mesh>
 	);
