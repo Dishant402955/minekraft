@@ -89,7 +89,7 @@ export const Cube = ({
 					map={currentTexture}
 					color={isHovered ? "grey" : "white"}
 					transparent={true}
-					opacity={texture === "glass" ? 0.9 : 1}
+					opacity={texture === "glass" ? 0.7 : 1}
 				/>
 			</mesh>
 		</>
