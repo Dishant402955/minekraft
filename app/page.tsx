@@ -6,6 +6,7 @@ import { Canvas } from "@react-three/fiber";
 import { Ground } from "./components/ground";
 import { Player } from "./components/player";
 import { FPV } from "./components/FPV";
+import { Cubes } from "./components/cubes";
 
 export default function Home() {
 	return (
@@ -21,6 +22,7 @@ export default function Home() {
 				<ambientLight intensity={2} />
 				<FPV />
 				<Physics>
+					<Cubes />
 					<Player />
 					<Ground />
 				</Physics>

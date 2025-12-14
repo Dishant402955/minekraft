@@ -5,7 +5,7 @@ import { useEffect, useRef } from "react";
 import { Vector3 } from "three";
 import { useKeyboard } from "../hooks/useKeyboard";
 
-const JUMP_INTENSITY = 2;
+const JUMP_INTENSITY = 3;
 const SPEED = 4;
 
 export const Player = () => {
