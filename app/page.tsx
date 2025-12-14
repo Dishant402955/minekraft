@@ -5,6 +5,7 @@ import { Sky } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { Ground } from "./components/ground";
 import { Player } from "./components/player";
+import { FPV } from "./components/FPV";
 
 export default function Home() {
 	return (
@@ -18,11 +19,13 @@ export default function Home() {
 					sunPosition={[100, 100, 20]}
 				/>
 				<ambientLight intensity={2} />
+				<FPV />
 				<Physics>
 					<Player />
 					<Ground />
 				</Physics>
 			</Canvas>
+			<div className="absolute top-[50%] left-[50%] text-2xl">+</div>
 		</>
 	);
 }
