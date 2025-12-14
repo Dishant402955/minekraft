@@ -2,6 +2,7 @@ import { useBox } from "@react-three/cannon";
 import { useTexture } from "@react-three/drei";
 import { textureUrls } from "./textures";
 import { NearestFilter, RepeatWrapping } from "three";
+import { useStore } from "../hooks/useStore";
 
 export const Cube = ({
 	position,
@@ -14,6 +15,11 @@ export const Cube = ({
 		type: "Static",
 		position,
 	}));
+
+	// @ts-ignore
+	const addCube = useStore((state) => state.addCube);
+	// @ts-ignore
+	const removeCube = useStore((state) => state.removeCube);
 
 	const textureMap = {
 		dirt: textureUrls.dirt,
@@ -33,7 +39,40 @@ export const Cube = ({
 
 	return (
 		<>
-			<mesh ref={ref}>
+			<mesh
+				ref={ref}
+				onClick={(e) => {
+					e.stopPropagation();
+
+					// @ts-ignore
+					const clickedFace = Math.floor(e.faceIndex / 2);
+
+					const [x, y, z] = ref.current.position;
+
+					if (e.ctrlKey) {
+						removeCube(x, y, z);
+						return;
+					} else if (clickedFace === 0) {
+						addCube(x + 1, y, z);
+						return;
+					} else if (clickedFace === 1) {
+						addCube(x - 1, y, z);
+						return;
+					} else if (clickedFace === 2) {
+						addCube(x, y + 1, z);
+						return;
+					} else if (clickedFace === 3) {
+						addCube(x, y - 1, z);
+						return;
+					} else if (clickedFace === 4) {
+						addCube(x, y, z + 1);
+						return;
+					} else if (clickedFace === 5) {
+						addCube(x, y, z - 1);
+						return;
+					}
+				}}
+			>
 				<boxGeometry attach={"geometry"} />
 				<meshStandardMaterial attach={"material"} map={currentTexture} />
 			</mesh>

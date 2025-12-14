@@ -27,7 +27,9 @@ export default function Home() {
 					<Ground />
 				</Physics>
 			</Canvas>
-			<div className="absolute top-[50%] left-[50%] text-2xl">+</div>
+			<div className="absolute top-[50%] left-[50%] text-2xl text-white translate-x-[-50%] translate-y-[-50%]">
+				+
+			</div>
 		</>
 	);
 }
