@@ -3,6 +3,7 @@ import { useTexture } from "@react-three/drei";
 import { textureUrls } from "./textures";
 import { NearestFilter, RepeatWrapping } from "three";
 import { useStore } from "../hooks/useStore";
+import { useState } from "react";
 
 export const Cube = ({
 	position,
@@ -16,6 +17,7 @@ export const Cube = ({
 		position,
 	}));
 
+	const [isHovered, setIsHovered] = useState(false);
 	// @ts-ignore
 	const addCube = useStore((state) => state.addCube);
 	// @ts-ignore
@@ -41,6 +43,14 @@ export const Cube = ({
 		<>
 			<mesh
 				ref={ref}
+				onPointerMove={(e) => {
+					e.stopPropagation();
+					setIsHovered(true);
+				}}
+				onPointerOut={(e) => {
+					e.stopPropagation();
+					setIsHovered(false);
+				}}
 				onClick={(e) => {
 					e.stopPropagation();
 
@@ -74,7 +84,13 @@ export const Cube = ({
 				}}
 			>
 				<boxGeometry attach={"geometry"} />
-				<meshStandardMaterial attach={"material"} map={currentTexture} />
+				<meshStandardMaterial
+					attach={"material"}
+					map={currentTexture}
+					color={isHovered ? "grey" : "white"}
+					transparent={true}
+					opacity={texture === "glass" ? 0.9 : 1}
+				/>
 			</mesh>
 		</>
 	);
