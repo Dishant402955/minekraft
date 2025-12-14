@@ -4,13 +4,33 @@ import { useFrame, useThree } from "@react-three/fiber";
 import { useEffect, useRef } from "react";
 import { Vector3 } from "three";
 import { useKeyboard } from "../hooks/useKeyboard";
+import { useStore } from "../hooks/useStore";
 
 const JUMP_INTENSITY = 3;
 const SPEED = 4;
 
 export const Player = () => {
-	const { jump, moveBackward, moveForward, moveLeft, moveRight } =
-		useKeyboard();
+	const {
+		jump,
+		moveBackward,
+		moveForward,
+		moveLeft,
+		moveRight,
+		texture1,
+		texture2,
+		texture3,
+		texture4,
+	} = useKeyboard();
+
+	// @ts-ignore
+	const setTexture = useStore((state) => state.setTexture);
+
+	useEffect(() => {
+		if (texture1) setTexture("dirt");
+		else if (texture2) setTexture("glass");
+		else if (texture3) setTexture("wood");
+		else if (texture4) setTexture("log");
+	}, [texture1, texture2, texture3, texture4, setTexture]);
 
 	const { camera } = useThree();
 	const [ref, api] = useSphere(() => ({
