@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
 
-// @ts-ignore
-const actionByKey = (key) => {
-	const keyActionMap = {
+// FIX: map number keys to texture1..texture5
+const actionByKey = (key: string) => {
+	const keyActionMap: Record<string, string> = {
 		ArrowUp: "moveForward",
 		ArrowDown: "moveBackward",
 		ArrowLeft: "moveLeft",
@@ -12,19 +12,20 @@ const actionByKey = (key) => {
 		KeyA: "moveLeft",
 		KeyD: "moveRight",
 		Space: "jump",
-		Digit1: "dirt",
-		Digit2: "grass",
-		Digit3: "glass",
-		Digit4: "wood",
-		Digit5: "log",
-		Numpad1: "dirt",
-		Numpad2: "grass",
-		Numpad3: "glass",
-		Numpad4: "wood",
-		Numpad5: "log",
+
+		Digit1: "texture1",
+		Digit2: "texture2",
+		Digit3: "texture3",
+		Digit4: "texture4",
+		Digit5: "texture5",
+
+		Numpad1: "texture1",
+		Numpad2: "texture2",
+		Numpad3: "texture3",
+		Numpad4: "texture4",
+		Numpad5: "texture5",
 	};
 
-	// @ts-ignore
 	return keyActionMap[key];
 };
 
@@ -39,39 +40,25 @@ export const useKeyboard = () => {
 		texture2: false,
 		texture3: false,
 		texture4: false,
-		texture5: false,
 	});
 
 	const handleKeydown = useCallback((e: KeyboardEvent) => {
 		const action = actionByKey(e.code);
-
 		if (action) {
-			setActions((prev) => {
-				return {
-					...prev,
-					[action]: true,
-				};
-			});
+			setActions((prev) => ({ ...prev, [action]: true }));
 		}
 	}, []);
 
 	const handleKeyUp = useCallback((e: KeyboardEvent) => {
 		const action = actionByKey(e.code);
-
 		if (action) {
-			setActions((prev) => {
-				return {
-					...prev,
-					[action]: false,
-				};
-			});
+			setActions((prev) => ({ ...prev, [action]: false }));
 		}
 	}, []);
 
 	useEffect(() => {
 		document.addEventListener("keydown", handleKeydown);
 		document.addEventListener("keyup", handleKeyUp);
-
 		return () => {
 			document.removeEventListener("keydown", handleKeydown);
 			document.removeEventListener("keyup", handleKeyUp);

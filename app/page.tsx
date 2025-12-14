@@ -7,6 +7,7 @@ import { Ground } from "./components/ground";
 import { Player } from "./components/player";
 import { FPV } from "./components/FPV";
 import { Cubes } from "./components/cubes";
+import { TextureSelector } from "./components/textureSelector";
 
 export default function Home() {
 	return (
@@ -30,6 +31,7 @@ export default function Home() {
 			<div className="absolute top-[50%] left-[50%] text-2xl text-white translate-x-[-50%] translate-y-[-50%]">
 				+
 			</div>
+			<TextureSelector />
 		</>
 	);
 }

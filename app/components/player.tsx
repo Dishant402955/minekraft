@@ -9,24 +9,14 @@ const JUMP_INTENSITY = 3;
 const SPEED = 4;
 
 export const Player = () => {
-	const {
-		jump,
-		moveBackward,
-		moveForward,
-		moveLeft,
-		moveRight,
-		texture1,
-		texture2,
-		texture3,
-		texture4,
-		texture5,
-	} = useKeyboard();
+	const { jump, moveBackward, moveForward, moveLeft, moveRight } =
+		useKeyboard();
 
 	const { camera } = useThree();
 	const [ref, api] = useSphere(() => ({
 		mass: 1,
 		type: "Dynamic",
-		position: [0, 4, 0],
+		position: [0, 1, 0],
 	}));
 
 	const pos = useRef([0, 0, 0]);
