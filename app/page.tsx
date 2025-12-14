@@ -1,9 +1,20 @@
-import Image from "next/image";
+"use client";
+
+import { Sky } from "@react-three/drei";
+import { Canvas } from "@react-three/fiber";
 
 export default function Home() {
 	return (
-		<div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-			Hello
-		</div>
+		<>
+			<Canvas>
+				<Sky
+					// turbidity={0.9}
+					// azimuth={0.8}
+					// inclination={0.5}
+					// rayleigh={0.4}
+					sunPosition={[100, 100, 20]}
+				/>
+			</Canvas>
+		</>
 	);
 }
