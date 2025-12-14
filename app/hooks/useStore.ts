@@ -1,9 +1,15 @@
 import { nanoid } from "nanoid";
 import { create } from "zustand";
 
+// @ts-ignore
+const getLocaleStorage = (key) => JSON.parse(window.localStorage.getItem(key));
+// @ts-ignore
+const setLocaleStorage = (key: string, value) =>
+	window.localStorage.setItem(key, JSON.stringify(value));
+
 export const useStore = create((set) => ({
 	texture: "dirt",
-	cubes: [],
+	cubes: getLocaleStorage("cubes") || [],
 	addCube: (x: Number, y: Number, z: Number) => {
 		// @ts-ignore
 		set((prev) => ({
@@ -31,6 +37,15 @@ export const useStore = create((set) => ({
 			texture: texture,
 		}));
 	},
-	saveWorld: () => {},
-	resetWorld: () => {},
+	saveWorld: () => {
+		// @ts-ignore
+		set((prev) => {
+			setLocaleStorage("cubes", prev.cubes);
+		});
+	},
+	resetWorld: () => {
+		set(() => ({
+			cubes: [],
+		}));
+	},
 }));
