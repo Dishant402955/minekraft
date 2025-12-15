@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
 
-// FIX: map number keys to texture1..texture5
 const actionByKey = (key: string) => {
 	const keyActionMap: Record<string, string> = {
 		ArrowUp: "moveForward",
