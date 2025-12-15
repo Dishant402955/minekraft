@@ -7,10 +7,11 @@ export const FPV = () => {
 	const controlsRef = useRef<any>(null);
 
 	useEffect(() => {
-		const handleClick = () => {
-			if (!document.pointerLockElement) {
-				controlsRef.current?.lock();
-			}
+		const handleClick = (e: MouseEvent) => {
+			// If the click is inside any element with class "ui-block", ignore
+			if ((e.target as HTMLElement).closest(".ui-block")) return;
+
+			controlsRef.current?.lock();
 		};
 
 		document.addEventListener("click", handleClick);
