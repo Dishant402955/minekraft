@@ -5,6 +5,7 @@ import { useStore } from "../hooks/useStore";
 
 export const TextureSelector = () => {
 	const [visible, setVisible] = useState(false);
+
 	// @ts-ignore
 	const activeTexture = useStore((state) => state.texture);
 

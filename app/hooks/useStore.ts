@@ -1,51 +1,65 @@
 import { nanoid } from "nanoid";
 import { create } from "zustand";
 
-// @ts-ignore
-const getLocaleStorage = (key) => JSON.parse(window.localStorage.getItem(key));
-// @ts-ignore
-const setLocaleStorage = (key: string, value) =>
-	window.localStorage.setItem(key, JSON.stringify(value));
+type Cube = {
+	key: string;
+	position: [number, number, number];
+	texture: string;
+};
 
-export const useStore = create((set) => ({
+type Store = {
+	texture: string;
+	cubes: Cube[];
+	addCube: (x: number, y: number, z: number) => void;
+	removeCube: (x: number, y: number, z: number) => void;
+	setTexture: (texture: string) => void;
+	loadWorld: () => void;
+	saveWorld: () => void;
+	resetWorld: () => void;
+};
+
+export const useStore = create<Store>((set, get) => ({
 	texture: "dirt",
-	cubes: getLocaleStorage("cubes") || [],
-	addCube: (x: Number, y: Number, z: Number) => {
-		// @ts-ignore
-		set((prev) => ({
+	cubes: [],
+
+	addCube: (x, y, z) => {
+		const { cubes, texture } = get();
+		set({
 			cubes: [
-				...prev.cubes,
+				...cubes,
 				{
 					key: nanoid(),
 					position: [x, y, z],
-					texture: prev.texture,
+					texture,
 				},
 			],
-		}));
-	},
-	removeCube: (x: Number, y: Number, z: Number) => {
-		// @ts-ignore
-		set((prev) => ({
-			cubes: prev.cubes.filter((cube: any) => {
-				const [X, Y, Z] = cube.position;
-				return X !== x || Y !== y || Z !== z;
-			}),
-		}));
-	},
-	setTexture: (texture: string) => {
-		set(() => ({
-			texture: texture,
-		}));
-	},
-	saveWorld: () => {
-		// @ts-ignore
-		set((prev) => {
-			setLocaleStorage("cubes", prev.cubes);
 		});
 	},
+
+	removeCube: (x, y, z) =>
+		set((state) => ({
+			cubes: state.cubes.filter(
+				(c) => c.position[0] !== x || c.position[1] !== y || c.position[2] !== z
+			),
+		})),
+
+	setTexture: (texture) => set({ texture }),
+
+	loadWorld: () => {
+		if (typeof window === "undefined") return;
+		const saved = localStorage.getItem("cubes");
+		if (saved) {
+			set({ cubes: JSON.parse(saved) });
+		}
+	},
+
+	saveWorld: () => {
+		if (typeof window === "undefined") return;
+		localStorage.setItem("cubes", JSON.stringify(get().cubes));
+	},
+
 	resetWorld: () => {
-		set(() => ({
-			cubes: [],
-		}));
+		set({ cubes: [] });
+		localStorage.setItem("cubes", JSON.stringify(get().cubes));
 	},
 }));

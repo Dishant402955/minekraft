@@ -9,8 +9,16 @@ import { FPV } from "./components/FPV";
 import { Cubes } from "./components/cubes";
 import { TextureSelector } from "./components/textureSelector";
 import { Menu } from "./components/menu";
+import { useStore } from "./hooks/useStore";
+import { useEffect } from "react";
 
 export default function Home() {
+	const loadWorld = useStore((s) => s.loadWorld);
+
+	useEffect(() => {
+		loadWorld();
+	}, [loadWorld]);
+
 	return (
 		<>
 			<Canvas>
@@ -33,7 +41,7 @@ export default function Home() {
 				+
 			</div>
 			<TextureSelector />
-			{/* <Menu /> */}
+			<Menu />
 		</>
 	);
 }
