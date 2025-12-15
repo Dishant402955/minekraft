@@ -2,7 +2,7 @@
 
 import { usePlane } from "@react-three/cannon";
 import { useTexture } from "@react-three/drei";
-import { textureUrls } from "./textures";
+import { useBlockTextures } from "./textures";
 import { NearestFilter, RepeatWrapping } from "three";
 import { useStore } from "../hooks/useStore";
 
@@ -14,30 +14,22 @@ export const Ground = () => {
 
 	// @ts-ignore
 	const addCube = useStore((state) => state.addCube);
+	const { grass } = useBlockTextures();
 
-	const grassTexture = useTexture(textureUrls.grass);
+	const handleClick = (e: any) => {
+		e.stopPropagation();
 
-	grassTexture.magFilter = NearestFilter;
-	grassTexture.wrapS = RepeatWrapping;
-	grassTexture.wrapT = RepeatWrapping;
-	grassTexture.repeat.set(300, 300);
+		const x = Math.round(e.point.x);
+		const y = Math.round(e.point.y + 0.5);
+		const z = Math.round(e.point.z);
+
+		addCube(x, y, z);
+	};
 
 	return (
-		<mesh
-			ref={ref}
-			receiveShadow
-			onClick={(e) => {
-				e.stopPropagation();
-
-				const x = Math.floor(e.point.x);
-				const y = Math.floor(e.point.y + 1); // ALWAYS above ground
-				const z = Math.floor(e.point.z);
-
-				addCube(x, y, z);
-			}}
-		>
+		<mesh ref={ref} receiveShadow onClick={handleClick}>
 			<planeGeometry args={[300, 300]} />
-			<meshStandardMaterial map={grassTexture} />
+			<meshStandardMaterial map={grass} />
 		</mesh>
 	);
 };

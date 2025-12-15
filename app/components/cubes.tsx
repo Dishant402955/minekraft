@@ -1,16 +1,22 @@
 "use client";
 import { useStore } from "@/app/hooks/useStore";
 import { Cube } from "./cube";
+import { useBlockTextures } from "./textures";
 
 export const Cubes = () => {
-	// @ts-ignore
 	const cubes = useStore((state) => state.cubes);
+	const textures = useBlockTextures();
 
 	return (
 		<>
-			{cubes.map(({ key, position, texture }: any) => {
-				return <Cube position={position} key={key} texture={texture} />;
-			})}
+			{cubes.map(({ key, position, texture }) => (
+				<Cube
+					key={key}
+					position={position}
+					texture={texture}
+					textures={textures}
+				/>
+			))}
 		</>
 	);
 };
