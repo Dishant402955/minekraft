@@ -10,27 +10,11 @@ const JUMP_INTENSITY = 3;
 const SPEED = 4;
 
 export const Player = () => {
-	const {
-		jump,
-		moveBackward,
-		moveForward,
-		moveLeft,
-		moveRight,
-		texture1,
-		texture2,
-		texture3,
-		texture4,
-	} = useKeyboard();
+	const { jump, moveBackward, moveForward, moveLeft, moveRight } =
+		useKeyboard();
 
 	// @ts-ignore
 	const setTexture = useStore((state) => state.setTexture);
-
-	useEffect(() => {
-		if (texture1) setTexture("dirt");
-		else if (texture2) setTexture("glass");
-		else if (texture3) setTexture("wood");
-		else if (texture4) setTexture("log");
-	}, [texture1, texture2, texture3, texture4, setTexture]);
 
 	const { camera } = useThree();
 	const [ref, api] = useSphere(() => ({

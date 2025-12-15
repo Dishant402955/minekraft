@@ -28,7 +28,11 @@ export const Ground = () => {
 			receiveShadow
 			onClick={(e) => {
 				e.stopPropagation();
-				const [x, y, z] = Object.values(e.point).map((val) => Math.ceil(val));
+
+				const x = Math.floor(e.point.x);
+				const y = Math.floor(e.point.y + 1); // ALWAYS above ground
+				const z = Math.floor(e.point.z);
+
 				addCube(x, y, z);
 			}}
 		>

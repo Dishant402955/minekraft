@@ -8,7 +8,9 @@ export const FPV = () => {
 
 	useEffect(() => {
 		const handleClick = () => {
-			controlsRef.current?.lock();
+			if (!document.pointerLockElement) {
+				controlsRef.current?.lock();
+			}
 		};
 
 		document.addEventListener("click", handleClick);

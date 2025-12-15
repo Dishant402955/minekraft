@@ -11,6 +11,7 @@ import { TextureSelector } from "./components/textureSelector";
 import { Menu } from "./components/menu";
 import { useStore } from "./hooks/useStore";
 import { useEffect } from "react";
+import { Controls } from "./components/Controls";
 
 export default function Home() {
 	const loadWorld = useStore((s) => s.loadWorld);
@@ -21,14 +22,16 @@ export default function Home() {
 
 	return (
 		<>
+			<Controls />
 			<Canvas>
 				<Sky sunPosition={[100, 100, 20]} />
 				<ambientLight intensity={2} />
 				<FPV />
+
 				<Physics>
-					<Cubes />
 					<Player />
 					<Ground />
+					<Cubes />
 				</Physics>
 			</Canvas>
 			<div className="absolute top-[50%] left-[50%] text-2xl text-white translate-x-[-50%] translate-y-[-50%]">
