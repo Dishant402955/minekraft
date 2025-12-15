@@ -16,12 +16,16 @@ type Store = {
 	loadWorld: () => void;
 	saveWorld: () => void;
 	resetWorld: () => void;
+	deleteMode: boolean;
+	setDeleteMode: (v: boolean) => void;
 };
 
 export const useStore = create<Store>((set, get) => ({
 	texture: "dirt",
 	cubes: [],
+	deleteMode: false,
 
+	setDeleteMode: (v) => set({ deleteMode: v }),
 	addCube: (x, y, z) => {
 		const { cubes, texture } = get();
 		set({

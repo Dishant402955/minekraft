@@ -10,8 +10,14 @@ const JUMP_INTENSITY = 3;
 const SPEED = 4;
 
 export const Player = () => {
-	const { jump, moveBackward, moveForward, moveLeft, moveRight } =
+	const { jump, moveBackward, moveForward, moveLeft, moveRight, deleteMode } =
 		useKeyboard();
+
+	const setDeleteMode = useStore((s) => s.setDeleteMode);
+
+	useEffect(() => {
+		setDeleteMode(deleteMode);
+	}, [deleteMode, setDeleteMode]);
 
 	// @ts-ignore
 	const setTexture = useStore((state) => state.setTexture);

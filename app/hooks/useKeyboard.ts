@@ -23,6 +23,8 @@ const actionByKey = (key: string) => {
 		Numpad3: "texture3",
 		Numpad4: "texture4",
 		Numpad5: "texture5",
+
+		Delete: "deleteMode",
 	};
 
 	return keyActionMap[key];
@@ -39,6 +41,7 @@ export const useKeyboard = () => {
 		texture2: false,
 		texture3: false,
 		texture4: false,
+		deleteMode: false,
 	});
 
 	const handleKeydown = useCallback((e: KeyboardEvent) => {

@@ -21,6 +21,7 @@ export const Cube = ({
 	const [isHovered, setIsHovered] = useState(false);
 	const addCube = useStore((state) => state.addCube);
 	const removeCube = useStore((state) => state.removeCube);
+	const deleteMode = useStore((state) => state.deleteMode);
 
 	return (
 		<mesh
@@ -37,6 +38,11 @@ export const Cube = ({
 				e.stopPropagation();
 				const face = Math.floor(e.faceIndex! / 2);
 				const [x, y, z] = ref.current!.position;
+
+				if (deleteMode) {
+					removeCube(x, y, z);
+					return;
+				}
 
 				if (e.ctrlKey) return removeCube(x, y, z);
 				if (face === 0) addCube(x + 1, y, z);
