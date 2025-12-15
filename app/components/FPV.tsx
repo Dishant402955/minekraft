@@ -10,7 +10,7 @@ export const FPV = () => {
 		const handleClick = (e: MouseEvent) => {
 			if ((e.target as HTMLElement).closest(".ui-block")) return;
 
-			// @ts-expect-error
+			// @ts-expect-error because nothing works right now i will catch it up in future Promise
 			controlsRef.current?.lock();
 		};
 
