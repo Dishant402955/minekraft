@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect } from "react";
-import { useKeyboard } from "../hooks/useKeyboard";
-import { useStore } from "../hooks/useStore";
+import { useKeyboard } from "@/app/hooks/useKeyboard";
+import { useStore } from "@/app/hooks/useStore";
 
 export const Controls = () => {
 	const { texture1, texture2, texture3, texture4 } = useKeyboard();

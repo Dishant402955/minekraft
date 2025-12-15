@@ -1,7 +1,8 @@
 "use client";
+
 import { useStore } from "@/app/hooks/useStore";
-import { Cube } from "./cube";
-import { useBlockTextures } from "./textures";
+import { Cube } from "@/app/components/cube";
+import { useBlockTextures } from "@/app/components/textures";
 
 export const Cubes = () => {
 	const cubes = useStore((state) => state.cubes);

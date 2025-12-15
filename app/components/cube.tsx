@@ -1,8 +1,9 @@
 "use client";
+
 import { useBox } from "@react-three/cannon";
-import { useStore } from "../hooks/useStore";
 import { useState } from "react";
 import { Texture } from "three";
+import { useStore } from "@/app/hooks/useStore";
 
 export const Cube = ({
 	position,

@@ -1,8 +1,8 @@
 "use client";
 
-import { useStore } from "../hooks/useStore";
-import { exportWorld } from "../utils/exportWorld";
-import { importWorld } from "../utils/importWorld";
+import { useStore } from "@/app/hooks/useStore";
+import { exportWorld } from "@/app/utils/exportWorld";
+import { importWorld } from "@/app/utils/importWorld";
 
 export const Menu = () => {
 	const saveWorld = useStore((state) => state.saveWorld);

@@ -3,15 +3,15 @@
 import { Physics } from "@react-three/cannon";
 import { Sky } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
-import { Ground } from "./components/ground";
-import { Player } from "./components/player";
-import { FPV } from "./components/FPV";
-import { Cubes } from "./components/cubes";
-import { TextureSelector } from "./components/textureSelector";
-import { Menu } from "./components/menu";
-import { useStore } from "./hooks/useStore";
 import { useEffect } from "react";
-import { Controls } from "./components/Controls";
+import { Ground } from "@/app/components/ground";
+import { Player } from "@/app/components/player";
+import { FPV } from "@/app/components/FPV";
+import { Cubes } from "@/app/components/cubes";
+import { TextureSelector } from "@/app/components/textureSelector";
+import { Menu } from "@/app/components/menu";
+import { useStore } from "@/app/hooks/useStore";
+import { Controls } from "@/app/components/Controls";
 
 export default function Home() {
 	const loadWorld = useStore((s) => s.loadWorld);

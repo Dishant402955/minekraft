@@ -1,7 +1,13 @@
-export const exportWorld = (cubes: any[]) => {
+export const exportWorld = (
+	cubes: {
+		position: [x: number, y: number, z: number];
+		texture: string;
+		key: string;
+	}[]
+) => {
 	if (typeof window === "undefined") return;
 
-	const data = JSON.stringify(cubes, null, 2); // pretty print JSON
+	const data = JSON.stringify(cubes, null, 2);
 	const blob = new Blob([data], { type: "application/json" });
 	const url = URL.createObjectURL(blob);
 

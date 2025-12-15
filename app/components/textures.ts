@@ -1,5 +1,5 @@
 import { useTexture } from "@react-three/drei";
-import { NearestFilter, RepeatWrapping, Texture } from "three";
+import { NearestFilter, RepeatWrapping } from "three";
 import { dirtImg, grassImg, glassImg, logImg, woodImg } from "@/public/images";
 
 export const useBlockTextures = () => {

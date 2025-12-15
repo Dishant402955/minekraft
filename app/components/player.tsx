@@ -3,8 +3,8 @@ import { useSphere } from "@react-three/cannon";
 import { useFrame, useThree } from "@react-three/fiber";
 import { useEffect, useRef } from "react";
 import { Vector3 } from "three";
-import { useKeyboard } from "../hooks/useKeyboard";
-import { useStore } from "../hooks/useStore";
+import { useKeyboard } from "@/app/hooks/useKeyboard";
+import { useStore } from "@/app/hooks/useStore";
 
 const JUMP_INTENSITY = 3;
 const SPEED = 4;
@@ -18,9 +18,6 @@ export const Player = () => {
 	useEffect(() => {
 		setDeleteMode(deleteMode);
 	}, [deleteMode, setDeleteMode]);
-
-	// @ts-ignore
-	const setTexture = useStore((state) => state.setTexture);
 
 	const { camera } = useThree();
 	const [ref, api] = useSphere(() => ({

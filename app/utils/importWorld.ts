@@ -1,4 +1,4 @@
-import { useStore } from "../hooks/useStore";
+import { useStore } from "@/app/hooks/useStore";
 
 export const importWorld = (file: File) => {
 	const reader = new FileReader();
@@ -11,19 +11,22 @@ export const importWorld = (file: File) => {
 
 			if (!Array.isArray(data)) throw new Error("Invalid world file");
 
-			// Update Zustand store
-			const setCubes = useStore.getState().resetWorld; // optional: clears first
+			const setCubes = useStore.getState().resetWorld;
 			const addCubes = useStore.getState().addCube;
 
-			// Clear existing cubes
 			setCubes();
 
-			// Add cubes from file
-			data.forEach((cube: any) => {
-				const [x, y, z] = cube.position;
-				// Use the store’s addCube function so textures are respected
-				addCubes(x, y, z);
-			});
+			data.forEach(
+				(cube: {
+					position: [x: number, y: number, z: number];
+					texture: string;
+					key: string;
+				}) => {
+					const [x, y, z] = cube.position;
+
+					addCubes(x, y, z);
+				}
+			);
 		} catch (err) {
 			console.error("Failed to import world:", err);
 		}

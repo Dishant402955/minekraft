@@ -1,10 +1,9 @@
 "use client";
 
 import { usePlane } from "@react-three/cannon";
-import { useTexture } from "@react-three/drei";
-import { useBlockTextures } from "./textures";
-import { NearestFilter, RepeatWrapping } from "three";
-import { useStore } from "../hooks/useStore";
+import { ThreeEvent } from "@react-three/fiber";
+import { useBlockTextures } from "@/app/components/textures";
+import { useStore } from "@/app/hooks/useStore";
 
 export const Ground = () => {
 	const [ref] = usePlane(() => ({
@@ -12,11 +11,10 @@ export const Ground = () => {
 		position: [0, -0.5, 0],
 	}));
 
-	// @ts-ignore
 	const addCube = useStore((state) => state.addCube);
 	const { grass } = useBlockTextures();
 
-	const handleClick = (e: any) => {
+	const handleClick = (e: ThreeEvent<globalThis.MouseEvent>) => {
 		e.stopPropagation();
 
 		const x = Math.round(e.point.x);

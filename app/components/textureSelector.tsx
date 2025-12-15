@@ -1,6 +1,6 @@
 "use client";
 
-import { useStore } from "../hooks/useStore";
+import { useStore } from "@/app/hooks/useStore";
 
 export const TextureSelector = () => {
 	const texture = useStore((s) => s.texture);

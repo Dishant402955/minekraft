@@ -4,13 +4,13 @@ import { PointerLockControls } from "@react-three/drei";
 import { useEffect, useRef } from "react";
 
 export const FPV = () => {
-	const controlsRef = useRef<any>(null);
+	const controlsRef = useRef(null);
 
 	useEffect(() => {
 		const handleClick = (e: MouseEvent) => {
-			// If the click is inside any element with class "ui-block", ignore
 			if ((e.target as HTMLElement).closest(".ui-block")) return;
 
+			// @ts-expect-error
 			controlsRef.current?.lock();
 		};
 
